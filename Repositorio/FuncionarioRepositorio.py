@@ -1,35 +1,37 @@
 from Controle import Funcionario
 
-def Adicionar_Funcionario(funcionario):
+def adicionar_Funcionario(funcionario):
     arquivo = open('Funcionario.txt', 'r')
     linhas = []
     for linha in arquivo:#Percorrer arquivo linha por linha
         linhas.append(linha)#Adicionar linha numa lista de linhas
     posicao = None
     for x in range(0, len(linhas)):
-        if funcionario.getCpf() in linhas[x]:#Se a busca encontrar o cpf na linha, pegamos a posição na lista de linhas
+        valores_separados = linhas[x].split(' ')
+        if funcionario.getCpf() == valores_separados[0]:#verifica se o cpf é igual ao cpf no arquivo
             posicao = x
     arquivo.close()
     if posicao is None:#Se o funcionario não existir no arquivo, inserir normalmente
         arquivo = open('Funcionario.txt', 'r')
         conteudo = arquivo.readlines()#recebe o conteúdo do arquivo
-        conteudo.append(funcionario.getCpf() + ' ' + funcionario.getNome() + ' ' + funcionario.getTelefone() + '\n')#insere o conteúdo novo
+        conteudo.append(funcionario.getCpf() + ' ' + funcionario.getNome() + ' ' + funcionario.getTelefone() + ' ' + funcionario.getSenha()+'\n')#insere o conteúdo novo
         arquivo = open('Funcionario.txt', 'w')
         arquivo.writelines(conteudo)  #escreve no arquivo
     else:
         print('Funcionário já existe')
     arquivo.close()
-def Limpar_arquivo():
+def limpar_Arquivo():
     arquivo = open('Funcionario.txt', 'w')
     arquivo.close()
-def Deletar_funcionario(cpf):
+def deletar_Funcionario(cpf):
     arquivo = open('Funcionario.txt','r')
     linhas = []
     for linha in arquivo:#Percorrer arquivo linha por linha
         linhas.append(linha)#Adicionar linha numa lista de linhas
     posicao = None
     for x in range(0,len(linhas)):
-        if cpf in linhas[x]:
+        valores_separados = linhas[x].split(' ')
+        if cpf == valores_separados[0]:#verifica se o cpf é igual ao cpf no arquivo
             posicao = x
     if posicao is None:
         print('Funcionário não encontrado')#Não encontrou o Funcionario dentro do arquivo
@@ -39,14 +41,15 @@ def Deletar_funcionario(cpf):
         arquivo.writelines(linhas)#escreve novamente no arquivo
 
     arquivo.close()
-def Alterar_Funcionario(funcionario):
+def alterar_Funcionario(funcionario):
     arquivo = open('Funcionario.txt', 'r')
     linhas = []
     for linha in arquivo:#Percorrer arquivo linha por linha
         linhas.append(linha)#Adicionar linha numa lista de linhas
     posicao = None
     for x in range(0, len(linhas)):
-        if funcionario.getCpf() in linhas[x]:#Se a busca encontrar o cpf na linha, pegamos a posição na lista de linhas
+        valores_separados = linhas[x].split(' ')
+        if funcionario.getCpf() == valores_separados[0]:#verifica se o cpf é igual ao cpf no arquivo
             posicao = x
     arquivo.close()
     if posicao is None:  # Se o funcionario não existir no arquivo, alteração não funciona
@@ -54,28 +57,32 @@ def Alterar_Funcionario(funcionario):
     else:#Se o funcionario existe, alterar normalmente
         arquivo = open('Funcionario.txt', 'r')
         conteudo = arquivo.readlines()  # recebe o conteúdo do arquivo
-        conteudo[posicao] = funcionario.getCpf() + ' ' + funcionario.getNome() + ' ' + funcionario.getTelefone() + '\n'#Alterando o funcionario encontrado
+        texto_split = conteudo[posicao].split(' ')
+        senha = texto_split[len(texto_split)-1][:-1]#passando a senha atual e removendo o \n que fica no final da string
+        conteudo[posicao] = funcionario.getCpf() + ' ' + funcionario.getNome() + ' ' + funcionario.getTelefone() + ' ' + senha + '\n'#Alterando o funcionario encontrado
         arquivo = open('Funcionario.txt', 'w')
         arquivo.writelines(conteudo)#Escrevendo no arquivo
     arquivo.close()
-def Buscar_Funcionario(cpf):
+def buscar_Funcionario(cpf):
     arquivo = open('Funcionario.txt','r')
     linhas = []
     for linha in arquivo:#Percorrer arquivo linha por linha
         linhas.append(linha)#Adicionar linha numa lista de linhas
     posicao = None
     for x in range(0, len(linhas)):
-        if cpf in linhas[x]:#Se a busca encontrar o cpf na linha, pegamos a posição na lista de linhas
+        valores_separados = linhas[x].split(' ')
+        if cpf == valores_separados[0]:#verifica se o cpf é igual ao cpf no arquivo
             posicao = x
     arquivo.close()
     if posicao is None:#Se não for encontrado, retornar mensagem de erro
         print('Usuário não encontrado')
     else:#Caso seja encontrado, retornar um objeto Funcionario
+        nome = pegar_nome(linhas[posicao])
         valores = linhas[posicao].split(' ')
-        obj = Funcionario.Funcionario(valores[0],valores[1],valores[2])
-        return obj
+        obj = Funcionario.Funcionario(valores[0],nome,valores[len(valores)-2])#instanciando objeto com cpf, nome e o telefone
+        return obj#retornando objeto correspondente a busca
 
-def Listar_Funcionarios():
+def listar_Funcionarios():
     arquivo = open('Funcionario.txt','r')
     linhas = []
     for linha in arquivo:
@@ -83,6 +90,42 @@ def Listar_Funcionarios():
     print(linhas)
     arquivo.close()
 
-Listar_Funcionarios()
+def alterar_senha(cpf,senha_nova):
+    arquivo = open('Funcionario.txt','r')
+    linhas = []
+    for linha in arquivo:  # Percorrer arquivo linha por linha
+        linhas.append(linha)  # Adicionar linha numa lista de linhas
+    posicao = None
+    for x in range(0, len(linhas)):
+        valores_separados = linhas[x].split(' ')
+        if cpf == valores_separados[0]:#verifica se o cpf é igual ao cpf no arquivo
+            posicao = x
+
+    arquivo.close()
+    if posicao is None:
+        print('Funcionário não encontrado!')#caso não encontre funcionário, exibir mensagem de erro
+    else:
+        nome = pegar_nome(linhas[posicao])
+        valores = linhas[posicao].split(' ')#se encontrar funcionário, pegar os dados separados dele
+        valores[len(valores)-1] = senha_nova#substituindo senha antiga pela nova
+        linhas[posicao] = valores[0] + ' ' + nome + ' ' + valores[len(valores)-2] + ' ' + valores[len(valores)-1] + '\n'#substituindo a antiga linha pela nova
+        arquivo = open('Funcionario.txt', 'w')
+        arquivo.writelines(linhas)#escrevendo no arquivo
+        arquivo.close()
+
+def pegar_nome(texto):#Se o nome vier composto, isso é, com espaços, como "joão da silva santos", essa função garante que o nome será retornado normalmente
+    texto = texto.split(' ')
+    texto.pop(0)#Removendo o primeiro dado(cpf)
+    texto.pop(len(texto)-2)#removendo o penultimo dado(telefone)
+    texto.pop(len(texto) - 1)#removendo o ultimo dado(senha)
+    nome = ''
+    for x in texto:
+        nome = nome + x + ' '#concatenando os nomes
+    nome = nome[:-1]#removendo o espaço em branco que sempre fica no final da string
+    return nome
+
+
+
+alterar_senha('12345678912','outrasenha')
 
 

@@ -15,3 +15,7 @@ class Funcionario:
         return self.telefone
     def setTelefone(self,telefone):
         self.telefone = telefone
+    def getSenha(self):
+        return self.senha
+    def setSenha(self,senha):
+        self.senha = senha
