@@ -1,15 +1,19 @@
 from Controle import Funcionario
 
+def funcionario_existe(cpf,linhas):
+    posicao = None
+    for x in range(0, len(linhas)):
+        valores_separados = linhas[x].split(' ')
+        if cpf == valores_separados[0]:  # verifica se o cpf é igual ao cpf no arquivo
+            posicao = x
+    return posicao
+
 def adicionar_Funcionario(funcionario):
     arquivo = open('Funcionario.txt', 'r')
     linhas = []
     for linha in arquivo:#Percorrer arquivo linha por linha
         linhas.append(linha)#Adicionar linha numa lista de linhas
-    posicao = None
-    for x in range(0, len(linhas)):
-        valores_separados = linhas[x].split(' ')
-        if funcionario.getCpf() == valores_separados[0]:#verifica se o cpf é igual ao cpf no arquivo
-            posicao = x
+    posicao = funcionario_existe(funcionario.getCpf(),linhas)
     arquivo.close()
     if posicao is None:#Se o funcionario não existir no arquivo, inserir normalmente
         arquivo = open('Funcionario.txt', 'r')
@@ -28,30 +32,24 @@ def deletar_Funcionario(cpf):
     linhas = []
     for linha in arquivo:#Percorrer arquivo linha por linha
         linhas.append(linha)#Adicionar linha numa lista de linhas
-    posicao = None
-    for x in range(0,len(linhas)):
-        valores_separados = linhas[x].split(' ')
-        if cpf == valores_separados[0]:#verifica se o cpf é igual ao cpf no arquivo
-            posicao = x
+    arquivo.close()
+    posicao = funcionario_existe(cpf,linhas)
     if posicao is None:
         print('Funcionário não encontrado')#Não encontrou o Funcionario dentro do arquivo
     else:#Encontrou o Funcionario dentro do arquivo e irá deleta-lo
         linhas.pop(posicao)#Deleta o funcionario encontrado
         arquivo = open('Funcionario.txt', 'w')
         arquivo.writelines(linhas)#escreve novamente no arquivo
+        arquivo.close()
 
-    arquivo.close()
+
 def alterar_Funcionario(funcionario):
     arquivo = open('Funcionario.txt', 'r')
     linhas = []
     for linha in arquivo:#Percorrer arquivo linha por linha
         linhas.append(linha)#Adicionar linha numa lista de linhas
-    posicao = None
-    for x in range(0, len(linhas)):
-        valores_separados = linhas[x].split(' ')
-        if funcionario.getCpf() == valores_separados[0]:#verifica se o cpf é igual ao cpf no arquivo
-            posicao = x
     arquivo.close()
+    posicao = funcionario_existe(funcionario.getCpf(),linhas)
     if posicao is None:  # Se o funcionario não existir no arquivo, alteração não funciona
         print("Funcionario não encontrado")
     else:#Se o funcionario existe, alterar normalmente
@@ -62,18 +60,15 @@ def alterar_Funcionario(funcionario):
         conteudo[posicao] = funcionario.getCpf() + ' ' + funcionario.getNome() + ' ' + funcionario.getTelefone() + ' ' + senha + '\n'#Alterando o funcionario encontrado
         arquivo = open('Funcionario.txt', 'w')
         arquivo.writelines(conteudo)#Escrevendo no arquivo
-    arquivo.close()
+        arquivo.close()
+
 def buscar_Funcionario(cpf):
     arquivo = open('Funcionario.txt','r')
     linhas = []
     for linha in arquivo:#Percorrer arquivo linha por linha
         linhas.append(linha)#Adicionar linha numa lista de linhas
-    posicao = None
-    for x in range(0, len(linhas)):
-        valores_separados = linhas[x].split(' ')
-        if cpf == valores_separados[0]:#verifica se o cpf é igual ao cpf no arquivo
-            posicao = x
     arquivo.close()
+    posicao = funcionario_existe(cpf,linhas)
     if posicao is None:#Se não for encontrado, retornar mensagem de erro
         print('Usuário não encontrado')
     else:#Caso seja encontrado, retornar um objeto Funcionario
@@ -95,13 +90,8 @@ def alterar_senha(cpf,senha_nova):
     linhas = []
     for linha in arquivo:  # Percorrer arquivo linha por linha
         linhas.append(linha)  # Adicionar linha numa lista de linhas
-    posicao = None
-    for x in range(0, len(linhas)):
-        valores_separados = linhas[x].split(' ')
-        if cpf == valores_separados[0]:#verifica se o cpf é igual ao cpf no arquivo
-            posicao = x
-
     arquivo.close()
+    posicao = funcionario_existe(cpf,linhas)
     if posicao is None:
         print('Funcionário não encontrado!')#caso não encontre funcionário, exibir mensagem de erro
     else:
@@ -126,6 +116,5 @@ def pegar_nome(texto):#Se o nome vier composto, isso é, com espaços, como "jo�
 
 
 
-alterar_senha('12345678912','outrasenha')
 
 
