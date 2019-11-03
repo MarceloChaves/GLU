@@ -83,8 +83,8 @@ def listar_Funcionarios():
     linhas = []
     for linha in arquivo:
         linhas.append(linha)
-    print(linhas)
     arquivo.close()
+    return linhas
 '''
 def alterar_senha(cpf,senha_nova):
     arquivo = open('Funcionario.txt','r')

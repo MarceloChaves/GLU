@@ -1,5 +1,6 @@
 import re
 
+
 def isCpfValid(cpf):
     """ If cpf in the Brazilian format is valid, it returns True, otherwise, it returns False. """
 
@@ -50,4 +51,16 @@ def isCpfValid(cpf):
     if cpf[-2:] == "%s%s" % (firstVerifyingDigit,secondVerifyingDigit):
         return True
     return False
+
+def senhaisValid(senha):
+   caracteres_proibidos = [' ', ',','ã','õ','á','é','í','ô','ê','ú','û','ç','ó']
+   for x in caracteres_proibidos:
+       if x in senha:
+           return False
+   return True
+
+
+
+
+
 
