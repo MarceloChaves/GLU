@@ -1,6 +1,6 @@
 from src.Repositorio import FuncionarioRepositorio
-from src.Controle import Validation,Funcionario
-
+from src.Controle import Validation
+from Entidades import Funcionario
 
 
 def cadastrar_Funcionario(funcionario):
@@ -38,6 +38,6 @@ def listar_Funcionarios():
     lista = []
     for x in range(0,len(texto)):
         splitado = texto[x].split(' ')
-        funcionario = Funcionario.Funcionario(splitado[0],FuncionarioRepositorio.pegar_nome(texto[x]),splitado[len(splitado)-2])
+        funcionario = Funcionario.Funcionario(splitado[0], FuncionarioRepositorio.pegar_nome(texto[x]), splitado[len(splitado) - 2])
         lista.append(funcionario)
     return lista#Retorna uma lista de objetos com cpf,nome e telefone
