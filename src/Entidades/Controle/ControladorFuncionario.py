@@ -1,5 +1,5 @@
-from src.Repositorio import FuncionarioRepositorio
-from src.Controle import Validation
+from Dados.repositorios import FuncionarioRepositorio
+from Entidades.Controle import Validation
 from Entidades import Funcionario
 
 
@@ -41,3 +41,16 @@ def listar_Funcionarios():
         funcionario = Funcionario.Funcionario(splitado[0], FuncionarioRepositorio.pegar_nome(texto[x]), splitado[len(splitado) - 2])
         lista.append(funcionario)
     return lista#Retorna uma lista de objetos com cpf,nome e telefone
+
+def login(cpf,senha):
+    funcionario = buscar_Funcionario(cpf)
+    if funcionario is None:
+        return False
+    senha_real = FuncionarioRepositorio.pegar_senha(funcionario.getCpf())
+    if senha == senha_real:
+        return True
+    else:
+        return False
+
+
+
