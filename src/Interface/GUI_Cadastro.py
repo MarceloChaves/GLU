@@ -11,6 +11,16 @@ def popup_erro(mensagem):
     b1.pack()
     popup.mainloop()
 
+def popup_sucesso(mensagem):
+    popup = Tk()
+    popup.wm_title('Sucesso!')
+    label = Label(popup,text = mensagem)
+    label.pack(side='top', fill='x', pady=10)
+    b1 = Button(popup,text="OK", command = popup.destroy)
+    b1.pack()
+    popup.mainloop()
+
+
 
 
 
@@ -59,7 +69,6 @@ class Cadastro_func:
         self.senha = Entry(self.terceiroContainer)
         self.senha["width"] = 30
         self.senha["font"] = self.fontePadrao
-        self.senha["show"] = "*"
         self.senha.pack(side=LEFT)
 
         self.nomeLabel = Label(self.quartoContainer,text="Nome", font=self.fontePadrao)
@@ -96,4 +105,22 @@ class Cadastro_func:
         elif self.telefone.get() == "":
             popup_erro("Telefone vazio, por favor informe um Telefone")
         else:
-            print('passou')#ainda está incompleta
+            splited = self.telefone.get().split(' ')
+            telefone = ''
+            for x in splited:
+                telefone = telefone + x
+            senha = self.senha.get()
+            nome = self.nome.get()
+            cpf = self.cpf.get()
+            funcionario = Funcionario.Funcionario(cpf,nome,telefone)
+            funcionario.setSenha(senha)
+            resposta = ControladorFuncionario.cadastrar_Funcionario(funcionario)
+            if resposta == 'CPF invalido, por favor informar um CPF válido':
+                popup_erro(resposta)
+            elif resposta == 'Senha inválida!':
+                popup_erro(resposta)
+            elif resposta == 'Funcionário já existe':
+                popup_erro(resposta)
+            elif resposta == 'Cadastrado com sucesso':
+                popup_sucesso(resposta)
+                

@@ -58,9 +58,3 @@ def senhaisValid(senha):
        if x in senha:
            return False
    return True
-
-
-
-
-
-

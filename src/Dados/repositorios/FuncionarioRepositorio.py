@@ -22,9 +22,11 @@ def adicionar_Funcionario(funcionario):
         conteudo.append(funcionario.getCpf() + ' ' + funcionario.getNome() + ' ' + funcionario.getTelefone() + ' ' + funcionario.getSenha()+'\n')#insere o conteúdo novo
         arquivo = open('..\Dados\dbanco\Funcionario.txt', 'w')
         arquivo.writelines(conteudo)  #escreve no arquivo
+        arquivo.close()
+        return 'Cadastrado com sucesso'
     else:
-        print('Funcionário já existe')
-    arquivo.close()
+        return 'Funcionário já existe'
+
 def limpar_Arquivo():
     arquivo = open('..\Dados\dbanco\Funcionario.txt', 'w')
     arquivo.close()

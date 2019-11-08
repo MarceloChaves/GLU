@@ -6,11 +6,12 @@ from Entidades import Funcionario
 def cadastrar_Funcionario(funcionario):
     if Validation.isCpfValid(funcionario.getCpf()):#verifica se o cpf é válido
         if Validation.senhaisValid(funcionario.getSenha()):#verifica se a senha é válida
-            FuncionarioRepositorio.adicionar_Funcionario(funcionario)#Insere o funcionário
+           resposta = FuncionarioRepositorio.adicionar_Funcionario(funcionario)#Insere o funcionário
+           return resposta
         else:
-            print('Senha inválida!')
+            return 'Senha inválida!'
     else:
-        print('CPF invalido, por favor informar um CPF válido')
+        return 'CPF invalido, por favor informar um CPF válido'
 
 def deletar_Funcionario(cpf):
     if Validation.isCpfValid(cpf):#verifica se o cpf é válido

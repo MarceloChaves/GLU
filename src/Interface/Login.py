@@ -1,6 +1,7 @@
 from tkinter import *
 from Entidades.Controle import ControladorFuncionario
 from Interface.GUI_Cadastro import Cadastro_func
+from Interface.Main_GUI import Tela_Principal
 
 def popup_erro(mensagem):
     popup = Tk()
@@ -10,6 +11,7 @@ def popup_erro(mensagem):
     b1 = Button(popup,text="Entendi", command = popup.destroy)
     b1.pack()
     popup.mainloop()
+
 
 
 class Application:
@@ -39,13 +41,13 @@ class Application:
         self.titulo["font"] = ("Arial", "10", "bold")
         self.titulo.pack()
 
-        self.nomeLabel = Label(self.segundoContainer, text="CPF", font=self.fontePadrao)
-        self.nomeLabel.pack(side=LEFT)
+        self.cpfLabel = Label(self.segundoContainer, text="CPF", font=self.fontePadrao)
+        self.cpfLabel.pack(side=LEFT)
 
-        self.nome = Entry(self.segundoContainer)
-        self.nome["width"] = 30
-        self.nome["font"] = self.fontePadrao
-        self.nome.pack(side=LEFT)
+        self.cpf = Entry(self.segundoContainer)
+        self.cpf["width"] = 30
+        self.cpf["font"] = self.fontePadrao
+        self.cpf.pack(side=LEFT)
 
         self.senhaLabel = Label(self.terceiroContainer, text="Senha", font=self.fontePadrao)
         self.senhaLabel.pack(side=LEFT)
@@ -79,18 +81,21 @@ class Application:
 
     # Método verificar senha
     def verificaSenha(self):
-        usuario = self.nome.get()
+        cpf = self.cpf.get()
         senha = self.senha.get()
-        if ControladorFuncionario.login(usuario,senha):
-            self.mensagem["text"] = "logou"#chamar a tela de funcionario(ainda não implementado)
+        if ControladorFuncionario.login(cpf,senha):
+            funcionario = ControladorFuncionario.buscar_Funcionario(cpf)
+            tela_principal = Tk()
+            Tela_Principal(tela_principal)
+            tela_principal.mainloop()
         else:
             popup_erro("senha ou cpf incorretos")
     #chamando tela de cadastro
     def cadastrar_novo(self):
         tela_cadastro = Tk()#chamando tela de cadastro
         Cadastro_func(tela_cadastro)
+        tela_cadastro.geometry('500x500')
         tela_cadastro.mainloop()
-
 
 
 root = Tk()
