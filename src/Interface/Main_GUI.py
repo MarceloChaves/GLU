@@ -1,5 +1,5 @@
 from tkinter import *
-from Entidades.Controle import ControladorFuncionario
+
 
 
 class Tela_Principal:
@@ -25,6 +25,20 @@ class Tela_Principal:
         self.quintoContainer["padx"] = 20
         self.quintoContainer.pack()
 
-        self.titulo = Label(self.primeiroContainer, text="Bem vindo,")
+        self.titulo = Label(self.primeiroContainer, text="Bem vindo")
         self.titulo["font"] = ("Arial", "10", "bold")
         self.titulo.pack()
+
+        self.atualiza_btn = Button(self.segundoContainer)
+        self.atualiza_btn["text"] = "Atualizar"
+        self.atualiza_btn["font"] = ("Calibri", "8")
+        self.atualiza_btn["width"] = 12
+        self.atualiza_btn["command"] =
+        self.atualiza_btn.pack()
+
+
+    def atualiza_funcionario(self):
+        tela_atualiza = Tk()  # chamando tela de cadastro
+        tela_atualiza.geometry('500x500')
+        Atualiza_func(tela_atualiza)
+        tela_atualiza.mainloop()

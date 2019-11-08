@@ -21,11 +21,12 @@ def deletar_Funcionario(cpf):
 def atualizar_Funcionario(funcionario):
     if Validation.isCpfValid(funcionario.getCpf()):#verifica se o cpf é válido
         if Validation.senhaisValid(funcionario.getSenha()):#verifica se a senha é válida
-            FuncionarioRepositorio.alterar_Funcionario(funcionario)#altera os dados do funcionário
+            resposta = FuncionarioRepositorio.alterar_Funcionario(funcionario)#altera os dados do funcionário
+            return resposta
         else:
-            print('A senha que você deseja alterar é inválida!')
+           return 'A senha que você deseja alterar é inválida!'
     else:
-        print('O cpf informado é inválido!')
+        return 'O cpf informado é inválido!'
 
 def buscar_Funcionario(cpf):
     if Validation.isCpfValid(cpf):#verifica se o cpf é válido

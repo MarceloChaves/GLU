@@ -54,7 +54,7 @@ def alterar_Funcionario(funcionario):
     arquivo.close()
     posicao = funcionario_existe(funcionario.getCpf(),linhas)
     if posicao is None:  # Se o funcionario não existir no arquivo, alteração não funciona
-        print("Funcionario não encontrado")
+        return "Funcionario não encontrado"
     else:#Se o funcionario existe, alterar normalmente
         arquivo = open('..\Dados\dbanco\Funcionario.txt', 'r')
         conteudo = arquivo.readlines()  # recebe o conteúdo do arquivo
@@ -64,6 +64,7 @@ def alterar_Funcionario(funcionario):
         arquivo = open('..\Dados\dbanco\Funcionario.txt', 'w')
         arquivo.writelines(conteudo)#Escrevendo no arquivo
         arquivo.close()
+        return 'Funcionario atualizado com sucesso'
 
 def buscar_Funcionario(cpf):
     arquivo = open('..\Dados\dbanco\Funcionario.txt','r')
