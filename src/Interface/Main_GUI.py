@@ -1,7 +1,9 @@
 from tkinter import *
 from Interface.GUI_Funcionario.GUI_Atualiza import Atualiza_func
 from Interface.GUI_Funcionario.GUI_Deleta import Deleta_func
+from Interface.GUI_Funcionario.GUI_Lista import Lista_func
 from Interface.GUI_Funcionario.GUI_Buscar import Busca_func
+
 
 
 
@@ -53,6 +55,13 @@ class Tela_Principal:
         self.busca_btn["command"] = self.busca_funcionario
         self.busca_btn.pack()
 
+        self.lisar_btn = Button(self.quintoContainer)
+        self.lisar_btn["text"] = "Listar"
+        self.lisar_btn["font"] = ("Calibri", "8")
+        self.lisar_btn["width"] = 12
+        self.lisar_btn["command"] = self.lista_funcionario
+        self.lisar_btn.pack()
+
     def atualiza_funcionario(self):
         tela_atualiza = Tk()  # chamando tela de cadastro
         tela_atualiza.geometry('500x500')
@@ -70,3 +79,9 @@ class Tela_Principal:
         tela_busca.geometry('500x500')
         Busca_func(tela_busca)
         tela_busca.mainloop()
+
+    def lista_funcionario(self):
+        tela_lista = Tk()  # chamando tela de cadastro
+        tela_lista.geometry('500x500')
+        Lista_func(tela_lista)
+        tela_lista.mainloop()
