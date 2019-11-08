@@ -15,9 +15,10 @@ def cadastrar_Funcionario(funcionario):
 
 def deletar_Funcionario(cpf):
     if Validation.isCpfValid(cpf):#verifica se o cpf é válido
-        FuncionarioRepositorio.deletar_Funcionario(cpf)#deleta o funcionário
+        resposta =FuncionarioRepositorio.deletar_Funcionario(cpf)#deleta o funcionário
+        return resposta
     else:
-        print('O cpf informado é inválido!')
+        return 'O cpf informado é inválido!'
 def atualizar_Funcionario(funcionario):
     if Validation.isCpfValid(funcionario.getCpf()):#verifica se o cpf é válido
         if Validation.senhaisValid(funcionario.getSenha()):#verifica se a senha é válida
@@ -33,7 +34,7 @@ def buscar_Funcionario(cpf):
         funcionario = FuncionarioRepositorio.buscar_Funcionario(cpf)#recebe o objeto funcionário buscado
         return funcionario#retorna o objeto
     else:
-        print('O cpf informado é inválido!')
+        return 'O cpf informado é inválido!'
 
 def listar_Funcionarios():
     texto = FuncionarioRepositorio.listar_Funcionarios()#Recebe o texto do arquivo

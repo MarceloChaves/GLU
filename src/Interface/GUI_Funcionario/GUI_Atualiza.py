@@ -87,7 +87,7 @@ class Atualiza_func:
         self.telefone.pack(side=LEFT)
 
         self.criar = Button(self.sextoContainer)
-        self.criar["text"] = "Entrar"
+        self.criar["text"] = "Alterar"
         self.criar["font"] = ("Calibri", "8")
         self.criar["width"] = 12
         self.criar["command"] = self.validar_dados
@@ -113,11 +113,11 @@ class Atualiza_func:
             funcionario = Funcionario.Funcionario(cpf, nome, telefone)
             funcionario.setSenha(senha)
             resposta = ControladorFuncionario.atualizar_Funcionario(funcionario)
-            if resposta == 'CPF invalido, por favor informar um CPF válido':
+            if resposta == 'O cpf informado é inválido!':
                 popup_erro(resposta)
-            elif resposta == 'Senha inválida!':
+            elif resposta == 'A senha que você deseja alterar é inválida!':
                 popup_erro(resposta)
-            elif resposta == 'Funcionário já existe':
+            elif resposta == "Funcionario não encontrado":
                 popup_erro(resposta)
-            elif resposta == 'Cadastrado com sucesso':
+            elif resposta == 'Funcionario atualizado com sucesso':
                 popup_sucesso(resposta)

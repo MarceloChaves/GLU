@@ -38,12 +38,13 @@ def deletar_Funcionario(cpf):
     arquivo.close()
     posicao = funcionario_existe(cpf,linhas)
     if posicao is None:
-        print('Funcionário não encontrado')#Não encontrou o Funcionario dentro do arquivo
+        return 'Funcionário não encontrado'#Não encontrou o Funcionario dentro do arquivo
     else:#Encontrou o Funcionario dentro do arquivo e irá deleta-lo
         linhas.pop(posicao)#Deleta o funcionario encontrado
         arquivo = open('..\Dados\dbanco\Funcionario.txt', 'w')
         arquivo.writelines(linhas)#escreve novamente no arquivo
         arquivo.close()
+        return 'Deletado com Sucesso'
 
 
 def alterar_Funcionario(funcionario):
@@ -74,7 +75,7 @@ def buscar_Funcionario(cpf):
     arquivo.close()
     posicao = funcionario_existe(cpf,linhas)
     if posicao is None:#Se não for encontrado, retornar mensagem de erro
-        print('Usuário não encontrado')
+        return 'Usuário não encontrado'
     else:#Caso seja encontrado, retornar um objeto Funcionario
         nome = pegar_nome(linhas[posicao])
         valores = linhas[posicao].split(' ')

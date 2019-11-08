@@ -84,8 +84,8 @@ class Application:
         cpf = self.cpf.get()
         senha = self.senha.get()
         if ControladorFuncionario.login(cpf,senha):
-            funcionario = ControladorFuncionario.buscar_Funcionario(cpf)
             tela_principal = Tk()
+            tela_principal.geometry('400x400')
             Tela_Principal(tela_principal)
             tela_principal.mainloop()
         else:

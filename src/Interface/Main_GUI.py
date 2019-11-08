@@ -1,4 +1,7 @@
 from tkinter import *
+from Interface.GUI_Funcionario.GUI_Atualiza import Atualiza_func
+from Interface.GUI_Funcionario.GUI_Deleta import Deleta_func
+from Interface.GUI_Funcionario.GUI_Buscar import Busca_func
 
 
 
@@ -33,12 +36,37 @@ class Tela_Principal:
         self.atualiza_btn["text"] = "Atualizar"
         self.atualiza_btn["font"] = ("Calibri", "8")
         self.atualiza_btn["width"] = 12
-        self.atualiza_btn["command"] =
+        self.atualiza_btn["command"] = self.atualiza_funcionario
         self.atualiza_btn.pack()
 
+        self.deleta_btn = Button(self.terceiroContainer)
+        self.deleta_btn["text"] = "Deletar"
+        self.deleta_btn["font"] = ("Calibri", "8")
+        self.deleta_btn["width"] = 12
+        self.deleta_btn["command"] = self.deleta_funcionario
+        self.deleta_btn.pack()
+
+        self.busca_btn = Button(self.quartoContainer)
+        self.busca_btn["text"] = "Buscar"
+        self.busca_btn["font"] = ("Calibri", "8")
+        self.busca_btn["width"] = 12
+        self.busca_btn["command"] = self.busca_funcionario
+        self.busca_btn.pack()
 
     def atualiza_funcionario(self):
         tela_atualiza = Tk()  # chamando tela de cadastro
         tela_atualiza.geometry('500x500')
         Atualiza_func(tela_atualiza)
         tela_atualiza.mainloop()
+
+    def deleta_funcionario(self):
+        tela_deleta = Tk()  # chamando tela de cadastro
+        tela_deleta.geometry('500x500')
+        Deleta_func(tela_deleta)
+        tela_deleta.mainloop()
+
+    def busca_funcionario(self):
+        tela_busca = Tk()  # chamando tela de cadastro
+        tela_busca.geometry('500x500')
+        Busca_func(tela_busca)
+        tela_busca.mainloop()
