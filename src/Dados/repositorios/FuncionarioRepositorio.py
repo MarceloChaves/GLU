@@ -59,8 +59,6 @@ def alterar_Funcionario(funcionario):
     else:#Se o funcionario existe, alterar normalmente
         arquivo = open('..\Dados\dbanco\Funcionario.txt', 'r')
         conteudo = arquivo.readlines()  # recebe o conteúdo do arquivo
-        texto_split = conteudo[posicao].split(' ')
-        senha = texto_split[len(texto_split)-1][:-1]#passando a senha atual e removendo o \n que fica no final da string
         conteudo[posicao] = funcionario.getCpf() + ' ' + funcionario.getNome() + ' ' + funcionario.getTelefone() + ' ' + funcionario.getSenha() + '\n'#Alterando o funcionario encontrado
         arquivo = open('..\Dados\dbanco\Funcionario.txt', 'w')
         arquivo.writelines(conteudo)#Escrevendo no arquivo

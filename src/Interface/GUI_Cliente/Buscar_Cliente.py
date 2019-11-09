@@ -1,8 +1,8 @@
 from tkinter import *
-from Entidades.Controle import ControladorFuncionario
+from Entidades.Controle import ControladorCliente
 
 
-class Busca_func:
+class Busca_cliente:
     def __init__(self, master=None):
         self.fontePadrao = ("Arial", "10")
         self.primeiroContainer = Frame(master)
@@ -21,11 +21,7 @@ class Busca_func:
         self.quartoContainer["padx"] = 20
         self.quartoContainer.pack()
 
-        self.quintoContainer = Frame(master)
-        self.quintoContainer["padx"] = 20
-        self.quintoContainer.pack()
-
-        self.titulo = Label(self.primeiroContainer, text="Buscar Funcionário")
+        self.titulo = Label(self.primeiroContainer, text="Buscar Cliente")
         self.titulo["font"] = ("Arial", "10", "bold")
         self.titulo.pack()
 
@@ -55,26 +51,16 @@ class Busca_func:
         self.nome["font"] = self.fontePadrao
         self.nome.pack(side=LEFT)
 
-        self.telefoneLabel = Label(self.quintoContainer, text="Telefone", font=self.fontePadrao)
-        self.telefoneLabel.pack(side=LEFT)
-
-        self.telefone = Entry(self.quintoContainer)
-        self.telefone["width"] = 30
-        self.telefone["font"] = self.fontePadrao
-        self.telefone.pack(side=LEFT)
-
     def validar_dados(self):  # valida os campos, se todos estiverem ok, inserir normalmente no arquivo
         if self.cpf.get() == "":
             self.mensagem["text"] = "CPF vazio, por favor informe um CPF"
         else:
             cpf = self.cpf.get()
-            resposta = ControladorFuncionario.buscar_Funcionario(cpf)
+            resposta = ControladorCliente.buscar_Cliente(cpf)
             if isinstance(resposta,str):
                 self.mensagem["text"] = resposta
             else:
                 self.mensagem["text"] = ''
-                self.telefone.delete(0,END)
-                self.telefone.insert(0,resposta.getTelefone())
                 self.nome.delete(0,END)
                 self.nome.insert(0,resposta.getNome())
 

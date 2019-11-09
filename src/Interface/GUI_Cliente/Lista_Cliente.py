@@ -1,5 +1,5 @@
 from tkinter import *
-from Entidades.Controle import ControladorFuncionario
+from Entidades.Controle import ControladorCliente
 
 def popup_erro(mensagem):
     popup = Tk()
@@ -11,7 +11,7 @@ def popup_erro(mensagem):
     popup.mainloop()
 
 
-class Lista_func:
+class Lista_cliente:
     def __init__(self, master=None):
         self.fontePadrao = ("Arial", "10")
         self.primeiroContainer = Frame(master)
@@ -26,7 +26,7 @@ class Lista_func:
         self.terceiroContainer["padx"] = 20
         self.terceiroContainer.pack()
 
-        self.titulo = Label(self.primeiroContainer, text="Listar Funcionário")
+        self.titulo = Label(self.primeiroContainer, text="Listar Cliente")
         self.titulo["font"] = ("Arial", "10", "bold")
         self.titulo.pack()
 
@@ -37,17 +37,17 @@ class Lista_func:
         self.listar["command"] = self.validar_dados
         self.listar.pack()
 
-        self.mensagem = Label(self.segundoContainer, text="CPF     Nome      Telefone", font=self.fontePadrao)
+        self.mensagem = Label(self.segundoContainer, text="CPF     Nome", font=self.fontePadrao)
         self.mensagem.pack()
 
 
     def validar_dados(self):  # valida os campos, se todos estiverem ok, inserir normalmente no arquivo
-        lista = ControladorFuncionario.listar_Funcionarios()
+        lista = ControladorCliente.listar_Clientes()
         if len(lista) == 0:
             popup_erro('O arquivo está vazio')
         else:
             self.height = len(lista)
-            self.width = 3
+            self.width = 2
             celulas = {}
             for i in range(self.height):  # linha
                 for j in range(self.width):  # Coluna
@@ -60,5 +60,3 @@ class Lista_func:
                         celulas[(i,j)].insert(0,lista[i].getCpf())
                     elif j==1:
                         celulas[(i, j)].insert(0, lista[i].getNome())
-                    elif j==2:
-                        celulas[(i, j)].insert(0, lista[i].getTelefone())

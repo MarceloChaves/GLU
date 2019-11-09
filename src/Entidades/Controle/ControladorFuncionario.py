@@ -19,6 +19,7 @@ def deletar_Funcionario(cpf):
         return resposta
     else:
         return 'O cpf informado é inválido!'
+
 def atualizar_Funcionario(funcionario):
     if Validation.isCpfValid(funcionario.getCpf()):#verifica se o cpf é válido
         if Validation.senhaisValid(funcionario.getSenha()):#verifica se a senha é válida

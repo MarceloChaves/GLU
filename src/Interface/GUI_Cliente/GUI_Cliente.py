@@ -1,15 +1,13 @@
 from tkinter import *
-from Interface.GUI_Funcionario.GUI_Atualiza import Atualiza_func
-from Interface.GUI_Funcionario.GUI_Deleta import Deleta_func
-from Interface.GUI_Funcionario.GUI_Lista import Lista_func
-from Interface.GUI_Funcionario.GUI_Buscar import Busca_func
-from Interface.GUI_Cliente.GUI_Cliente import Crud_Cliente
+from Interface.GUI_Cliente.Adiciona_Cliente import Cadastro_cliente
+from Interface.GUI_Cliente.Lista_Cliente import Lista_cliente
+from Interface.GUI_Cliente.Buscar_Cliente import Busca_cliente
+from Interface.GUI_Cliente.Deleta_Cliente import Deleta_cliente
+from Interface.GUI_Cliente.Atualiza_Cliente import Atualiza_cliente
 
-
-
-
-class Tela_Principal:
+class Crud_Cliente:
     def __init__(self, master=None):
+
         self.fontePadrao = ("Arial", "10")
         self.primeiroContainer = Frame(master)
         self.primeiroContainer["pady"] = 10
@@ -35,7 +33,7 @@ class Tela_Principal:
         self.sextoContainer["pady"] = 20
         self.sextoContainer.pack()
 
-        self.titulo = Label(self.primeiroContainer, text="Bem vindo")
+        self.titulo = Label(self.primeiroContainer, text="Gerenciar Clientes")
         self.titulo["font"] = ("Arial", "10", "bold")
         self.titulo.pack()
 
@@ -43,63 +41,63 @@ class Tela_Principal:
         self.atualiza_btn["text"] = "Atualizar"
         self.atualiza_btn["font"] = ("Calibri", "8")
         self.atualiza_btn["width"] = 12
-        self.atualiza_btn["command"] = self.atualiza_funcionario
+        self.atualiza_btn["command"] = self.atualiza_cliente
         self.atualiza_btn.pack()
 
         self.deleta_btn = Button(self.terceiroContainer)
         self.deleta_btn["text"] = "Deletar"
         self.deleta_btn["font"] = ("Calibri", "8")
         self.deleta_btn["width"] = 12
-        self.deleta_btn["command"] = self.deleta_funcionario
+        self.deleta_btn["command"] = self.deleta_cliente
         self.deleta_btn.pack()
 
         self.busca_btn = Button(self.quartoContainer)
         self.busca_btn["text"] = "Buscar"
         self.busca_btn["font"] = ("Calibri", "8")
         self.busca_btn["width"] = 12
-        self.busca_btn["command"] = self.busca_funcionario
+        self.busca_btn["command"] = self.busca_cliente
         self.busca_btn.pack()
 
         self.lisar_btn = Button(self.quintoContainer)
         self.lisar_btn["text"] = "Listar"
         self.lisar_btn["font"] = ("Calibri", "8")
         self.lisar_btn["width"] = 12
-        self.lisar_btn["command"] = self.lista_funcionario
+        self.lisar_btn["command"] = self.lista_cliente
         self.lisar_btn.pack()
 
-        self.clientes_btn = Button(self.sextoContainer)
-        self.clientes_btn["text"] = "Clientes"
-        self.clientes_btn["font"] = ("Calibri", "8")
-        self.clientes_btn["width"] = 12
-        self.clientes_btn["command"] = self.gerenciar_clientes
-        self.clientes_btn.pack()
+        self.adicionar_btn = Button(self.sextoContainer)
+        self.adicionar_btn["text"] = "Cadastrar"
+        self.adicionar_btn["font"] = ("Calibri", "8")
+        self.adicionar_btn["width"] = 12
+        self.adicionar_btn["command"] = self.adicionar_clientes
+        self.adicionar_btn.pack()
 
-    def atualiza_funcionario(self):
-        tela_atualiza = Tk()  # chamando tela de cadastro
-        tela_atualiza.geometry('500x500')
-        Atualiza_func(tela_atualiza)
-        tela_atualiza.mainloop()
+    def adicionar_clientes(self):
+        tela_adiciona = Tk()
+        tela_adiciona.geometry('500x500')
+        Cadastro_cliente(tela_adiciona)
+        tela_adiciona.mainloop()
 
-    def deleta_funcionario(self):
-        tela_deleta = Tk()  # chamando tela de cadastro
-        tela_deleta.geometry('500x500')
-        Deleta_func(tela_deleta)
-        tela_deleta.mainloop()
-
-    def busca_funcionario(self):
-        tela_busca = Tk()  # chamando tela de cadastro
-        tela_busca.geometry('500x500')
-        Busca_func(tela_busca)
-        tela_busca.mainloop()
-
-    def lista_funcionario(self):
-        tela_lista = Tk()  # chamando tela de cadastro
+    def lista_cliente(self):
+        tela_lista = Tk()
         tela_lista.geometry('500x500')
-        Lista_func(tela_lista)
+        Lista_cliente(tela_lista)
         tela_lista.mainloop()
 
-    def gerenciar_clientes(self):
-        tela_cliente = Tk()
-        tela_cliente.geometry('500x500')
-        Crud_Cliente(tela_cliente)
-        tela_cliente.mainloop()
+    def busca_cliente(self):
+        tela_busca = Tk()
+        tela_busca.geometry('500x500')
+        Busca_cliente(tela_busca)
+        tela_busca.mainloop()
+
+    def deleta_cliente(self):
+        tela_deleta = Tk()
+        tela_deleta.geometry('500x500')
+        Deleta_cliente(tela_deleta)
+        tela_deleta.mainloop()
+
+    def atualiza_cliente(self):
+        tela_atualiza = Tk()
+        tela_atualiza.geometry('500x500')
+        Atualiza_cliente(tela_atualiza)
+        tela_atualiza.mainloop()
