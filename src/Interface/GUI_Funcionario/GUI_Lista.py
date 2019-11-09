@@ -52,13 +52,13 @@ class Lista_func:
             for i in range(self.height):  # linha
                 for j in range(self.width):  # Coluna
                     campo = Entry(self.terceiroContainer, text="")
-                    campo.grid(row=i, column=j)
-                    celulas[(i, j)] = campo
+                    campo.grid(row=i, column=j)#adicionando os campos em forma de matriz
+                    celulas[(i, j)] = campo#salvando cada campo em celulas, para que os inputs adicionados possam ser acessados posteriormente
             for i in range(self.height):  # linha
                 for j in range(self.width):  # Coluna
                     if j==0:
-                        celulas[(i,j)].insert(0,lista[i].getCpf())
+                        celulas[(i,j)].insert(0,lista[i].getCpf())#inserindo cpf na primeira coluna da linha n
                     elif j==1:
-                        celulas[(i, j)].insert(0, lista[i].getNome())
+                        celulas[(i, j)].insert(0, lista[i].getNome())#inserindo nome na segunda coluna da linha n
                     elif j==2:
-                        celulas[(i, j)].insert(0, lista[i].getTelefone())
+                        celulas[(i, j)].insert(0, lista[i].getTelefone())#inserindo telefone na terceira coluna da linha n

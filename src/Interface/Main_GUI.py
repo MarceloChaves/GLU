@@ -75,31 +75,31 @@ class Tela_Principal:
         self.clientes_btn.pack()
 
     def atualiza_funcionario(self):
-        tela_atualiza = Tk()  # chamando tela de cadastro
+        tela_atualiza = Tk()  # chamando tela de atualização
         tela_atualiza.geometry('500x500')
         Atualiza_func(tela_atualiza)
         tela_atualiza.mainloop()
 
     def deleta_funcionario(self):
-        tela_deleta = Tk()  # chamando tela de cadastro
+        tela_deleta = Tk()  # chamando tela de exclusão
         tela_deleta.geometry('500x500')
         Deleta_func(tela_deleta)
         tela_deleta.mainloop()
 
     def busca_funcionario(self):
-        tela_busca = Tk()  # chamando tela de cadastro
+        tela_busca = Tk()  # chamando tela de busca
         tela_busca.geometry('500x500')
         Busca_func(tela_busca)
         tela_busca.mainloop()
 
     def lista_funcionario(self):
-        tela_lista = Tk()  # chamando tela de cadastro
+        tela_lista = Tk()  # chamando tela de listagem
         tela_lista.geometry('500x500')
         Lista_func(tela_lista)
         tela_lista.mainloop()
 
     def gerenciar_clientes(self):
-        tela_cliente = Tk()
+        tela_cliente = Tk()#chamando tela para gerenciamento de clientes
         tela_cliente.geometry('500x500')
         Crud_Cliente(tela_cliente)
         tela_cliente.mainloop()

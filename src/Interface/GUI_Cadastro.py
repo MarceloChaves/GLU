@@ -96,7 +96,7 @@ class Cadastro_func:
 
 
     def validar_dados(self):#valida os campos, se todos estiverem ok, inserir normalmente no arquivo
-        if self.cpf.get() == "":
+        if self.cpf.get() == "":   #verificando se todos os campos estão preenchidos
             popup_erro("CPF vazio, por favor informe um CPF")
         elif self.senha.get() == "":
             popup_erro("Senha vazia, por favor informe uma Senha")
@@ -104,23 +104,23 @@ class Cadastro_func:
             popup_erro("Nome vazio, por favor informe um Nome")
         elif self.telefone.get() == "":
             popup_erro("Telefone vazio, por favor informe um Telefone")
-        else:
-            splited = self.telefone.get().split(' ')
+        else:  #se todos estiverem preenchidos, valida-los
+            splited = self.telefone.get().split(' ') #removendo os espaços em branco no telefone
             telefone = ''
             for x in splited:
                 telefone = telefone + x
             senha = self.senha.get()
             nome = self.nome.get()
             cpf = self.cpf.get()
-            funcionario = Funcionario.Funcionario(cpf,nome,telefone)
-            funcionario.setSenha(senha)
-            resposta = ControladorFuncionario.cadastrar_Funcionario(funcionario)
+            funcionario = Funcionario.Funcionario(cpf,nome,telefone)#instanciando objeto com os dados
+            funcionario.setSenha(senha)#setando a senha
+            resposta = ControladorFuncionario.cadastrar_Funcionario(funcionario) #chamando a função para inserir no arquivo
             if resposta == 'CPF invalido, por favor informar um CPF válido':
                 popup_erro(resposta)
             elif resposta == 'Senha inválida!':
                 popup_erro(resposta)
             elif resposta == 'Funcionário já existe':
                 popup_erro(resposta)
-            elif resposta == 'Cadastrado com sucesso':
+            elif resposta == 'Cadastrado com sucesso':#se não houver nenhum problema, avisar ao usuário que a operação ocorreu com sucesso
                 popup_sucesso(resposta)
                 

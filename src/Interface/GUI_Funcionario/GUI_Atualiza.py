@@ -93,8 +93,8 @@ class Atualiza_func:
         self.criar["command"] = self.validar_dados
         self.criar.pack()
 
-    def validar_dados(self):  # valida os campos, se todos estiverem ok, inserir normalmente no arquivo
-        if self.cpf.get() == "":
+    def validar_dados(self):  # valida os campos, se todos estiverem ok, atualizar normalmente no arquivo
+        if self.cpf.get() == "": #verificando se todos os campos estão preenchidos
             popup_erro("CPF vazio, por favor informe um CPF")
         elif self.senha.get() == "":
             popup_erro("Senha vazia, por favor informe uma Senha")
@@ -102,22 +102,22 @@ class Atualiza_func:
             popup_erro("Nome vazio, por favor informe um Nome")
         elif self.telefone.get() == "":
             popup_erro("Telefone vazio, por favor informe um Telefone")
-        else:
-            splited = self.telefone.get().split(' ')
+        else:  #se todos estiverem preenchidos, valida-los
+            splited = self.telefone.get().split(' ')  #removendo os espaços em branco no telefone
             telefone = ''
             for x in splited:
                 telefone = telefone + x
             senha = self.senha.get()
             nome = self.nome.get()
             cpf = self.cpf.get()
-            funcionario = Funcionario.Funcionario(cpf, nome, telefone)
-            funcionario.setSenha(senha)
-            resposta = ControladorFuncionario.atualizar_Funcionario(funcionario)
+            funcionario = Funcionario.Funcionario(cpf, nome, telefone)#instanciando objeto com os dados
+            funcionario.setSenha(senha) #setando a senha
+            resposta = ControladorFuncionario.atualizar_Funcionario(funcionario)#chamando a função para atualizar no arquivo
             if resposta == 'O cpf informado é inválido!':
                 popup_erro(resposta)
             elif resposta == 'A senha que você deseja alterar é inválida!':
                 popup_erro(resposta)
             elif resposta == "Funcionario não encontrado":
                 popup_erro(resposta)
-            elif resposta == 'Funcionario atualizado com sucesso':
+            elif resposta == 'Funcionario atualizado com sucesso': #se não houver nenhum problema, avisar ao usuário que a operação ocorreu com sucesso
                 popup_sucesso(resposta)
