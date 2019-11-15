@@ -48,7 +48,7 @@ def listar_Funcionarios():
 
 def login(cpf,senha):
     funcionario = buscar_Funcionario(cpf)
-    if funcionario is None:
+    if isinstance(funcionario,str):
         return False
     senha_real = FuncionarioRepositorio.pegar_senha(funcionario.getCpf())
     if senha == senha_real:

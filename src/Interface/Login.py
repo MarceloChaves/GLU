@@ -1,7 +1,7 @@
 from tkinter import *
 from Entidades.Controle import ControladorFuncionario
 from Interface.GUI_Cadastro import Cadastro_func
-from Interface.Main_GUI import Tela_Principal
+from Interface.Teste import Main
 
 def popup_erro(mensagem):
     popup = Tk()
@@ -16,6 +16,7 @@ def popup_erro(mensagem):
 
 class Application:
     def __init__(self, master=None):
+        self.master = master
         self.fontePadrao = ("Arial", "10")#definindo a fonte
         self.primeiroContainer = Frame(master)#Criando containers
         self.primeiroContainer["pady"] = 10
@@ -73,16 +74,18 @@ class Application:
         self.abrir_cadastro.pack()
 
 
-
     # Método verificar senha
     def verificaSenha(self):
+
         cpf = self.cpf.get()
         senha = self.senha.get()
         if ControladorFuncionario.login(cpf,senha):#verifica se o cpf e senha batem
-            tela_principal = Tk()
-            tela_principal.geometry('400x400')#definindo a dimensão da dela
-            Tela_Principal(tela_principal)
-            tela_principal.mainloop()
+            root = Tk()
+            root.configure(background='blue')
+            root.title("Gerenciamento de Loja Universal - GLU")
+            root.geometry("720x350")
+            Main(root)
+            root.mainloop()
         else:
             popup_erro("senha ou cpf incorretos")#exibir popup de erro com mensagem informando que o login falhou
     #chamando tela de cadastro
