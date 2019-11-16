@@ -12,6 +12,14 @@ def popup_erro(mensagem):
     b1.pack()
     popup.mainloop()
 
+def abremain():
+    root = Tk()
+    root.configure(background='blue')
+    root.title("Gerenciamento de Loja Universal - GLU")
+    root.geometry("720x350")
+    Main(root)
+    root.mainloop()
+
 
 
 class Application:
@@ -76,16 +84,12 @@ class Application:
 
     # Método verificar senha
     def verificaSenha(self):
-
         cpf = self.cpf.get()
         senha = self.senha.get()
         if ControladorFuncionario.login(cpf,senha):#verifica se o cpf e senha batem
-            root = Tk()
-            root.configure(background='blue')
-            root.title("Gerenciamento de Loja Universal - GLU")
-            root.geometry("720x350")
-            Main(root)
-            root.mainloop()
+            global passou
+            passou = True
+            self.master.destroy()
         else:
             popup_erro("senha ou cpf incorretos")#exibir popup de erro com mensagem informando que o login falhou
     #chamando tela de cadastro
@@ -94,8 +98,9 @@ class Application:
         Cadastro_func(tela_cadastro)
         tela_cadastro.geometry('500x500')
         tela_cadastro.mainloop()
-
-
+passou = False
 root = Tk()
 Application(root)
 root.mainloop()
+if passou:
+    abremain()
