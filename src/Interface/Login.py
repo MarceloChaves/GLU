@@ -1,7 +1,7 @@
 from tkinter import *
 from Entidades.Controle import ControladorFuncionario
 from Interface.GUI_Cadastro import Cadastro_func
-from Interface.Teste import Main
+from Interface.Principal import Main
 
 def popup_erro(mensagem):
     popup = Tk()
