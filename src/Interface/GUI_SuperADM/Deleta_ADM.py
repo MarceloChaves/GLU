@@ -1,9 +1,8 @@
 from tkinter import *
-from Entidades.Controle import ControladorFuncionario
 from Entidades.Controle import ControladorSuperADM
 
 
-class Deleta_func:
+class Deleta_adm:
     def __init__(self, master=None):
         self.fontePadrao = ("Arial", "10")
         self.primeiroContainer = Frame(master)
@@ -71,10 +70,10 @@ class Deleta_func:
                 self.mensagem["text"] = "CPF vazio, por favor informe um CPF"
             else:
                 cpf = self.cpf.get()
-                resposta = ControladorFuncionario.deletar_Funcionario(cpf)
+                resposta = ControladorSuperADM.deletar_Adm(cpf)
                 if resposta == 'O cpf informado é inválido!':
                     self.mensagem["text"] = resposta
-                elif resposta == 'Funcionário não encontrado':
+                elif resposta == 'ADM não encontrado':
                     self.mensagem["text"] = resposta
                 elif resposta == 'Deletado com Sucesso':
                     self.mensagem["text"] = resposta

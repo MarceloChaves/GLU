@@ -2,6 +2,7 @@ from tkinter import *
 from Entidades.Controle import ControladorFuncionario
 from Interface.GUI_Cadastro import Cadastro_func
 from Interface.Principal import Main
+from Entidades.Controle import ControladorSuperADM
 
 def popup_erro(mensagem):
     popup = Tk()
@@ -86,7 +87,7 @@ class Application:
     def verificaSenha(self):
         cpf = self.cpf.get()
         senha = self.senha.get()
-        if ControladorFuncionario.login(cpf,senha):#verifica se o cpf e senha batem
+        if ControladorFuncionario.login(cpf,senha) or ControladorSuperADM.login(cpf,senha):#verifica se o cpf e senha batem
             global passou
             passou = True
             self.master.destroy()
