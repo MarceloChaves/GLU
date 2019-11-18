@@ -6,7 +6,7 @@ class Fornecedores:
         return self.nome
     def setNome(self,nome):
         self.nome = nome
-    def getCpf(self):
+    def getCnpj(self):
         return self.cnpj
-    def setCpf(self,cnpj):
+    def setCnpj(self,cnpj):
         self.cnpj = cnpj
